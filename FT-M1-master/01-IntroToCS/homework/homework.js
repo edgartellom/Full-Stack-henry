@@ -19,10 +19,10 @@ function BinarioADecimal(num) {
   dec = Sumatoria de (2 ^ posición * digito)
   */
 
-  var invert = num.split('').reverse();
-  var dec = 0;
+  let invert = num.split('').reverse();
+  let dec = 0;
   for (let i = 0; i < invert.length; i++) {
-    dec += (2**i * invert[i])
+    dec += (Math.pow(2, i) * parseInt(invert[i]))
   }
   return dec
 }
@@ -51,12 +51,12 @@ function DecimalABinario(num) {
   */
 
   var array = [];
-  while (num !== 0) {
+  while (num > 0) {
     var mod = num % 2;
-    array.unshift(mod);
+    array.push(mod);
     num = Math.floor(num / 2)
   }
-  var bin = array.join('');
+  var bin = array.reverse().join('');
   return bin;
 }
 
