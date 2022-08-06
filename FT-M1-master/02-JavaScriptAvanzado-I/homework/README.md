@@ -6,6 +6,7 @@
 Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
+<!-- Al declarar una variable con 'var, esta se define como tal y se ejecuta una vez que se llama a la misma mientras que al asignar un valor sin declararlo como 'var', este se ejecuta directamente. -->
 
 ```javascript
 x = 1;
@@ -24,9 +25,26 @@ var c = function(a, b, c) {
   f(a,b,c);
   console.log(b);
 }
+// x = 1
+// a = 5
+// b = 10
+// c = function(a, b, c)
 c(8,9,10);
+   // x = 10; 
+   // x -> (10)
+   // a -> (8)
+   // f = function(a, b, c)
+   // f(a,b,c) -> f(8,9,10)
+      // b = a = 8
+      // b -> (8)
+      // b = c = 10
+      // x = 5
+   // b -> (9)
+
 console.log(b);
+// b -> (10)
 console.log(x);
+// x -> (1)
 ```
 
 ```javascript
@@ -36,6 +54,14 @@ foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
+// function foo()
+   // bar = 1
+   // baz = 2
+// bar -> (1)
+// baz -> (2)
+// foo()
+   // ('Hola')
+   // baz -> (2)
 ```
 
 ```javascript
@@ -44,6 +70,10 @@ if(true) {
     var instructor = "Franco";
 }
 console.log(instructor);
+// instructor = "Tony"
+// if(true)
+   // instructor = "Franco"
+// instructor -> (Franco)
 ```
 
 ```javascript
@@ -56,6 +86,13 @@ console.log(instructor);
    }
 })();
 console.log(instructor);
+// instructor = "Tony"
+// instructor -> (Tony)
+// function()
+   //if(true)
+      // instructor = "Franco"
+      // instructor -> (Franco)
+// instructor -> (Tony)
 ```
 
 ```javascript
@@ -69,28 +106,37 @@ if (true) {
 }
 console.log(instructor);
 console.log(pm);
+// instructor = "Tony"
+// pm = "Franco"
+// if(true)
+   // instructor = "The Flash"
+   // pm = "Reverse Flash" ---> Uso interno por el 'let'
+   // instructor -> (The Flash)
+   // pm -> (Reverse Flash)
+// instructor -> (The Flash)
+// pm -> (Franco)
 ```
 ### Coerción de Datos
 
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3" // 2
+"2" * "3" // 6
+4 + 5 + "px" // '9px'
+"$" + 4 + 5 // '$45'
+"4" - 2 // 2
+"4px" - 2 // NaN
+7 / 0 // Infinity
+{}[0] // [0]
+parseInt("09") // 9
+5 && 2 // 2
+2 && 5 // 5
+5 || 0 // 5
+0 || 5 // 5
+[3]+[3]-[10] // 23
+3>2>1 // false
+[] == ![] // true
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -110,8 +156,14 @@ function test() {
       return 2;
    }
 }
+// function test()
+   // function foo()
 
 test();
+   // a -> (undefined)
+   // foo() -> (2)
+   // a = 1
+
 ```
 
 Y el de este código? :
@@ -128,6 +180,8 @@ function getFood(food) {
 }
 
 getFood(false);
+   // if (false)
+   // snack -> (undefined)
 ```
 
 
@@ -152,6 +206,12 @@ console.log(obj.prop.getFullname());
 var test = obj.prop.getFullname;
 
 console.log(test());
+// fullname = 'Juan Perez'
+// obj.prop.getFullname()
+   //fullname : 'Natalia Nerea'
+      // this.fullname -> (Aurelio De Rosa)
+// test = obj.prop.getFullname ---> this pasó a global
+// test() -> (Juan Perez)
 ```
 
 ### Event loop
@@ -167,4 +227,10 @@ function printing() {
 }
 
 printing();
+   // (1)
+   // setTimeout -> 1000ms ...
+   // setTimeout -> 0ms ...
+   // (4)
+   // (3)
+   // (2)
 ```
