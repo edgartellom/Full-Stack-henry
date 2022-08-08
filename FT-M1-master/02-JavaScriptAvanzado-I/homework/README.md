@@ -54,14 +54,15 @@ foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
-// function foo()
-   // bar = 1
-   // baz = 2
-// bar -> (1)
-// baz -> (2)
-// foo()
-   // ('Hola')
-   // baz -> (2)
+// memoria
+// function foo()...
+// var bar = undefined
+// baz = undefined
+
+// exe
+// undefined
+// undefined
+// Hola!
 ```
 
 ```javascript
@@ -97,10 +98,12 @@ console.log(instructor);
 
 ```javascript
 var instructor = "Tony";
-let pm = "Franco";
+let pm = "Franco"; // no tiene hoisting
+
+//block scope
 if (true) {
     var instructor = "The Flash";
-    let pm = "Reverse Flash";
+    let pm = "Reverse Flash"; //respeta Blocks
     console.log(instructor);
     console.log(pm);
 }
@@ -128,9 +131,9 @@ console.log(pm);
 "4" - 2 // 2
 "4px" - 2 // NaN
 7 / 0 // Infinity
-{}[0] // [0]
+{}[0] // undefined
 parseInt("09") // 9
-5 && 2 // 2
+5 && 2 // 2 ... Si el primero es verdadero te devuelve el segundo
 2 && 5 // 5
 5 || 0 // 5
 0 || 5 // 5
@@ -211,7 +214,7 @@ console.log(test());
    //fullname : 'Natalia Nerea'
       // this.fullname -> (Aurelio De Rosa)
 // test = obj.prop.getFullname ---> this pasó a global
-// test() -> (Juan Perez)
+// test() -> (undefined)
 ```
 
 ### Event loop
