@@ -22,7 +22,7 @@ function counter() {
 
   let contador = 0
   return function(){
-    return contador += 1
+    return ++contador
   }
 }
 
