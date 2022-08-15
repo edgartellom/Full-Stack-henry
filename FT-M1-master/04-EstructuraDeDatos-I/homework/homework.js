@@ -15,27 +15,14 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
-  if(n < 1){
-    var fact = 1;
-    return fact;
-  }
-  fact = n * nFactorial(n-1)
-  return fact
+  return (n < 2) ? 1 : n * nFactorial(n-1)
 }
 
 function nFibonacci(n) {
-
   // 0,1,1,2,3
   // nFibonacci(4) = nFibonacci(3) + nFibonacci(2) =  (nFibonacci(2) + nFibonacci(1)) + nFibonacci(2) = 3
   
-  if (n === 0){
-    return 0
-  }
-  else if (n <= 2){
-    return 1
-  }
-  var fibo = nFibonacci(n-1) + nFibonacci(n-2)
-  return fibo
+  return (n < 2) ? n : (nFibonacci(n-1) + nFibonacci(n-2));
 }
 
 /*
