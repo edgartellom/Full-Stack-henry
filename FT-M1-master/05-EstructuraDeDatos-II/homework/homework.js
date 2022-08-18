@@ -21,9 +21,7 @@ function Node(value) {
   this.next = null;
 }
 
-function isEven(value) {
-  return (value % 2 === 0)
-}
+// function isEven(value) {return (value % 2 === 0)}
 
 LinkedList.prototype.add = function(value){
   let node = new Node(value);
@@ -49,33 +47,30 @@ LinkedList.prototype.remove = function(){
     return null
   }
   if (!current.next){
-    let save = this.head;
+    let rmNode = this.head;
     this.head = null;
     this._length--;
-    return save.value
+    return rmNode.value
   }
   while (current.next.next){
     current = current.next;
   }
-  let save = current.next;
+  let rmNode = current.next;
   current.next = null;
   this._length--;
-  return save.value
-
+  return rmNode.value
 }
+
 LinkedList.prototype.search = function(arg){
   let current = this.head;
   while (current){
+    if (current.value === arg) return current.value
     if (typeof arg === 'function'){
-      if (arg(current.value)){return current.value}
-    }
-    if (current.value === arg) {
-      return current.value
+      if (arg(current.value)) return current.value
     }
     current = current.next
   }
-  return null
-  
+  return null 
 }
 
 /*
@@ -98,31 +93,35 @@ function HashTable() {
   this.buckets = [];
 }
 
-HashTable.prototype.hash = function(string){
+HashTable.prototype.hash = function(key){
   let sum = 0
-  for (let i = 0; i < string.length; i++) {
-    sum += string.charCodeAt(i)
+  for (let i = 0; i < key.length; i++) {
+    sum += key.charCodeAt(i)
   }
-  let bucketNumber = sum % this.numBuckets;
-  return bucketNumber
+  return sum % this.numBuckets;
 }
 
 HashTable.prototype.set = function(key, value){
+  // Revisa que sea un string
   if (typeof key !== 'string') throw new TypeError('Keys must be strings');
-  let bucketNumber = this.hash(key);
-  if(!this.buckets[bucketNumber]) {
-    this.buckets[bucketNumber] = {}
+  let position = this.hash(key);
+  // si la posicion en el arreglo está vacío, crea un obj
+  if(!this.buckets[position]) {
+    this.buckets[position] = {}
   }
-  this.buckets[bucketNumber][key] = value;
+  this.buckets[position][key] = value;
 }
+
 HashTable.prototype.get = function(key){
-  let bucketNumber = this.hash(key);
-  return this.buckets[bucketNumber][key]
+  let position = this.hash(key);
+  return this.buckets[position][key]
 }
+
 HashTable.prototype.hasKey = function(key){
-  let bucketNumber = this.hash(key);
-  return this.buckets[bucketNumber].hasOwnProperty(key)
+  let position = this.hash(key);
+  return this.buckets[position].hasOwnProperty(key)
 }
+
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
