@@ -11,113 +11,84 @@
   El árbol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
 */
 
-class BinarySearchTree {
-  constructor(value){
-    this.value = value;
-    this.left = null;
-    this.rigth = null;
-    this._size = 1
+function BinarySearchTree (value) {
+  this.value = value;
+  this.right = null;
+  this.left = null;
+}
+BinarySearchTree.prototype.insert = function(value){
+  // evaluar value
+  // mayores a la derecha
+  if (value > this.value){
+    // si el nodo right está libre...
+    if (!this.right) this.right = new BinarySearchTree(value);
+    else this.right.insert(value);
   }
-  insert(v){
-    if (v < this.value){
-      if (!this.left){
-        this.left = new BinarySearchTree(v)
-        this._size++
-      } else{
-        this.left.insert(v)
-      }
-    }
-    if (v >= this.value){
-      if (!this.rigth){
-        this.rigth = new BinarySearchTree(v)
-        this._size++
-      }
-      else{
-        this.rigth.insert(v)
-      }
-    }
-  }
-
-  contains(v){
-    if (v === this.value) return true
-
-    else if (v < this.value && this.left) return this.left.contains(v)
-      
-    else if (v > this.value && this.rigth) return this.rigth.contains(v)
-
-    else if (v !== this.value) return false
-  }
-
-  size(){
-    var treeSize = 0
-    treeSize += this._size
-    if (this.left){
-      this.left.size()
-    }
-    else {
-      if (this.rigth){
-        this.rigth.size()
-      }
-    }
-    return treeSize
-  }
-  depthFirstForEach(saver, rout){
-    switch (rout){
-      case ('post-order'):
-        if (this.left) {
-          this.left.depthFirstForEach(saver, rout)
-        }
-        if (this.rigth){
-          this.rigth.depthFirstForEach(saver, rout)
-        }
-        saver(this.value)
-        break
-        
-      case ('pre-order'):
-        saver(this.value)
-        if (this.left) {
-          this.left.depthFirstForEach(saver, rout)
-        }
-        if (this.rigth){
-          this.rigth.depthFirstForEach(saver, rout)
-        }
-        break
-
-      case ('in-order'):
-        if (this.left) {
-          this.left.depthFirstForEach(saver, rout)
-        }
-        saver(this.value)
-        if (this.rigth){
-          this.rigth.depthFirstForEach(saver, rout)
-        }
-        break
-
-      case (undefined):
-        if (this.left) {
-          this.left.depthFirstForEach(saver, rout)
-        }
-        saver(this.value)
-        if (this.rigth){
-          this.rigth.depthFirstForEach(saver, rout)
-        }
-        break
-    }
-  }
-  breadthFirstForEach(saver, arr = []){
-    saver(this.value)
-    if (this.left){
-      arr.push(this.left)
-    } 
-    if (this.rigth){
-      arr.push(this.rigth)
-    }
-    if (arr.length){
-      arr.shift().breadthFirstForEach(saver,arr)
-    }
-    return arr
+  // menores a la izquierda
+  if (value < this.value){
+    // si el nodo left está libre...
+    if (!this.left) this.left = new BinarySearchTree(value);
+    else this.left.insert(value);
   }
 }
+
+BinarySearchTree.prototype.contains = function(value){
+  if (value === this.value) return true;
+  // mayores a la derecha
+  if (value > this.value){
+    if (!this.right) return false;
+    return this.right.contains(value)
+  }
+  // menores a la izquierda
+  if (value < this.value){
+    if (!this.left) return false;
+    return this.left.contains(value)
+  }
+}
+
+BinarySearchTree.prototype.size = function(){
+  if (!this.value) return 0;
+  if (!this.left && !this.right) return 1;
+  if (!this.left && this.right) return 1 + this.right.size();
+  if (this.left && !this.right) return 1 + this.left.size();
+  return 1 + this.right.size() + this.left.size()
+}
+BinarySearchTree.prototype.depthFirstForEach = function(cb, order){
+  if (order === 'post-order'){
+    // izq -> der -> root
+    if (this.left) this.left.depthFirstForEach(cb, order);
+
+    if (this.right) this.right.depthFirstForEach(cb, order);
+    cb(this.value);
+  }
+      
+  if (order === 'pre-order'){
+    // root -> izq -> der
+    cb(this.value)
+    if (this.left) this.left.depthFirstForEach(cb, order);
+    
+    if (this.right) this.right.depthFirstForEach(cb, order)
+  }
+      
+
+  if (order === 'in-order'|| order === undefined){
+    // izq -> root -> der
+    if (this.left) this.left.depthFirstForEach(cb, order)
+    
+    cb(this.value)
+    if (this.right) this.right.depthFirstForEach(cb, order)
+  }
+}
+
+BinarySearchTree.prototype.breadthFirstForEach = function(cb, queue = []){
+  cb(this.value)
+  if (this.left) queue.push(this.left)
+  
+  if (this.right) queue.push(this.right)
+  
+  if (queue.length > 0) queue.shift().breadthFirstForEach(cb,queue)
+}
+
 
 // let bst = new BinarySearchTree(20);
 // let arr = []
@@ -135,7 +106,6 @@ class BinarySearchTree {
 // // bst.depthFirstForEach(saver,'in-order')
 // bst.breadthFirstForEach(saver)
 // console.log(arr)
-
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
