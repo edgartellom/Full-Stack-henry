@@ -30,10 +30,13 @@ function bubbleSort(array) {
   // el array recibido como parámetro
   // Devolver el array ordenado resultante
   // Tu código:
+  // Inicializa listo para el intercambio
   var swap = true
   while (swap) {
+    // Restringe el intercambio
     swap = false
-    for (let i = 0; i < array.length; i++){
+    for (var i = 0; i < array.length; i++){
+      // Si un elemento es mayor que el siguiente, intercambian entre si y valida dicho intercambio
       if(array[i] > array[i+1]){
         let temp = array[i];
         array[i] = array[i+1];
@@ -54,11 +57,13 @@ function insertionSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
   for (let i = 1; i < array.length; i++){
-    let toInsert = array[i]
     for (let j = i-1; j >= 0; j--){
+      let toInsert = array[j+1]
+      // Si el elemento a insertar es menor que el numero anterior, intercambian de posicion.
+      // El elemento a insertar se conserva por cada ciclo de "j" 
       if (toInsert < array[j]){
         let temp = array[j];
-        array[j] = array[j+1];
+        array[j] = toInsert; // array[j] = array[j+1]
         array[j+1] = temp
       }
     }
@@ -75,8 +80,10 @@ function selectionSort(array) {
   // Tu código:
   
   for (let i = 0; i < array.length; i++){
+    // Asigna en primera instancia al primer elemento como el minimo
     let min = array[i]
     for (let j = i + 1; j < array.length; j++){
+      // Si encuentra un valor menor, intercambia el nuevo minimo con el asignado anteriormente
       if (array[j] < min){
         min = array[j];
         array[j] = array[i];
@@ -87,7 +94,7 @@ function selectionSort(array) {
   return array
 }
 
-console.log(selectionSort(arr))
+// console.log(selectionSort(arr))
 
 
 // No modificar nada debajo de esta línea
