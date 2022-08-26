@@ -6,21 +6,24 @@ function factorear(num) {
   // los factores por los cuales se va dividiendo a dicho número (De menor a mayor)
   // Ej: factorear(180) --> [1, 2, 2, 3, 3, 5] Ya que 1x2x2x3x3x5 = 180 y son todos números primos
   // Tu código:
-  let arr = []
+  let result = []
   let factor = 2
   
-  if (num > 0) arr.push(1);
-  
+  if (num > 0) result.push(1);
+  // mientras el num sea mayor a 1
   while (num > 1){
+    // se puede dividir entre "2" o el factor
     if (num % factor === 0){
-        arr.push(factor);
-        num = num/factor;
+      // guardo en array 
+      result.push(factor);
+      // dividido num entre el factor
+      num = num/factor;
       }
     else{
       factor++
     }
   }
-  return arr
+  return result
 }
 
 console.log(factorear(180))
@@ -56,19 +59,31 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
+  // for (let i = 1; i < array.length; i++){
+  //   for (let j = i-1; j >= 0; j--){
+  //     let toInsert = array[j+1]
+  //     // Si el elemento a insertar es menor que el numero anterior, intercambian de posicion.
+  //     // El elemento a insertar se conserva por cada ciclo de "j" 
+  //     if (toInsert < array[j]){
+  //       let temp = array[j];
+  //       array[j] = toInsert; // array[j] = array[j+1]
+  //       array[j+1] = temp
+  //     }
+  //   }
+  // }
+  // return array
   for (let i = 1; i < array.length; i++){
-    for (let j = i-1; j >= 0; j--){
-      let toInsert = array[j+1]
-      // Si el elemento a insertar es menor que el numero anterior, intercambian de posicion.
-      // El elemento a insertar se conserva por cada ciclo de "j" 
-      if (toInsert < array[j]){
-        let temp = array[j];
-        array[j] = toInsert; // array[j] = array[j+1]
-        array[j+1] = temp
-      }
+    // guarda posicion anterior
+    let x = i - 1;
+    // guarda valor actual
+    let temp = array[i];
+    while (x >=0 && temp < array[x]){ // el valor actual es menor al anterior?
+      array[x+1] = array[x];
+      x--;
     }
+    array[x+1] = temp;
   }
-  return array
+  return array;
 }
 
 // console.log(insertionSort(arr))
