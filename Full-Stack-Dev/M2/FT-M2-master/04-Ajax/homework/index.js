@@ -1,5 +1,5 @@
-$('#boton').click (function verAmigos(){
-    $.get(`http://localhost:5000/amigos`, function (data){
+$('#boton').click (()=>{
+    $.get(`http://localhost:5000/amigos`, (data)=>{
         let list = $('#lista');
         list.empty();
         for (let index = 0; index < data.length; index++){
@@ -10,10 +10,10 @@ $('#boton').click (function verAmigos(){
 });
 
 
-$('#search').click (function buscarAmigo(){ 
+$('#search').click (()=>{ 
     let searchId = $('#input').val();
 
-    $.get(`http://localhost:5000/amigos/`, function (data){   
+    $.get(`http://localhost:5000/amigos/`, (data)=>{   
         let found = false;
         for (let i = 0; i < data.length; i++){
             
@@ -31,26 +31,21 @@ $('#search').click (function buscarAmigo(){
 });
 
 
-$('#delete').click (function delAmigo(){
+$('#delete').click (()=>{
     let deleteId = $('#inputDelete').val();
     $.ajax({
         url: `http://localhost:5000/amigos/${deleteId}`,
         type: 'DELETE',
-        success: function(result) {
-            $('#lista').empty();
-            $.get(`http://localhost:5000/amigos`, function (){
-                for (let index = 0; index < result.length; index++){
-                    $('#lista').append(`<li>${result[index].name}<a href="#" style="text-decoration:none;"> X</a></li>`);
-                }
-            });
+        success: ()=> {
             $("#success").text("Tu amigo se ha borrado correctamente");
             setTimeout(() => {$("#success").empty()}, 3000)
+            $('#boton').click();
         }
     });
 });
 
 
-$('li > a').click (function eliminarAmigo(){
-    console.log('li');
+// $('a').click (()=>{
+//     console.log('li');
     
-}); 
+// }); 
