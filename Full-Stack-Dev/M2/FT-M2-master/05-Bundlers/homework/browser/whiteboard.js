@@ -1,6 +1,12 @@
-(function () {
+// (function () {
 
-  window.whiteboard = new window.EventEmitter();
+  // let whiteboard = new require ('./event-emitter.js');
+
+  import EventEmitter from './event-emitter.js';
+  export let whiteboard = new EventEmitter;
+  
+  
+  // window.whiteboard = new window.EventEmitter();
 
   // Ultimately, the color of our stroke;
   var color;
@@ -35,6 +41,7 @@
 
     // The device pixel ratio is the multiplier between CSS pixels
     // and device pixels
+    
     var pixelRatio = window.devicePixelRatio || 1;
 
     // Allocate backing store large enough to give us a 1:1 device pixel
@@ -113,4 +120,6 @@
 
   };
 
-})();
+// })();
+
+// module.exports = whiteboard;
