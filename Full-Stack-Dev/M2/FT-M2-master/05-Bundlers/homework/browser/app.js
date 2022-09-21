@@ -1,16 +1,15 @@
 // (function () {
 
   // var whiteboard = require ('./whiteboard.js');
-
-  // var socket = require ('socket.io-client');
+  // var io = require ('socket.io-client');
 
   import {whiteboard} from './whiteboard.js';
-
-  import {socket} from 'socket.io-client';
+  import {io} from 'socket.io-client';
 
   // var whiteboard = window.whiteboard;
-
   // var socket = window.io(window.location.origin);
+
+  var socket = io(location.origin);
 
   socket.on('connect', function () {
     console.log('Connected!');
