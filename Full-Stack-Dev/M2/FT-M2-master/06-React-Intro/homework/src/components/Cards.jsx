@@ -1,14 +1,14 @@
 import React from 'react';
 import Card from './Card';
 
-export default function Cards(props) {
+export default function Cards({cities}) {
   // acá va tu código
   // tip, podés usar un map
 
   return (
     <div>
       {
-        props.cities.map(city => (
+        cities.map(city => (
           <Card
             key={city.id}
             max={city.main.temp_max}
@@ -19,7 +19,6 @@ export default function Cards(props) {
           />
         ))
       }
-
     </div>
   )
 };
