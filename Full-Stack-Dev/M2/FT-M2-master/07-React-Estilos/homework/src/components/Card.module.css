@@ -3,24 +3,28 @@
     border: 2px solid lightgray;
     border-radius: 20px;
     margin-left: 50px;
+    box-shadow: 7px 5px 5px black;
 }
 
 .btnClose{
     float: right;
     margin: 10px;
-    background-color: red;
+    background-color: darkgray;
+    box-shadow: 3px 3px 3px gray;
     color: white;
-    border: 1px solid darkred;
     border-radius: 3px;
     
+}
+
+.btnClose:hover{
+    background-color: red;
 }
 
 .header{
     margin-top: 30px;
 }
 
-
-.grid{
+.body{
     display: flex;
     justify-content: space-around;
 }

@@ -9,15 +9,15 @@ export default function Card({max, min, name, img, onClose}) {
 
       <h3 className={s.header}>{name}</h3>
 
-      <div className={s.grid}>
+      <div className={s.body}>
         <div>
           <p>Min</p>
-          <p>{min}</p>
+          <p>{min}°</p>
         </div>
 
         <div>
           <p>Max</p>
-          <p>{max}</p>
+          <p>{max}°</p>
         </div>
 
         <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt="Img not found" />

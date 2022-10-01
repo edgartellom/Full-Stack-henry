@@ -5,8 +5,8 @@ export default function SearchBar({onSearch}) {
   // acá va tu código
   return (
     <div className={s.container}>
-      <input type="text" placeholder='Ciudad...' />
-      <button type='button' onClick={()=>onSearch("Agregando ciudad...")}>Agregar</button>
+      <input type="text" className={s.inputSearch} placeholder='Ciudad...' />
+      <button type='button' className={s.btnSearch} onClick={()=>onSearch("Agregando ciudad...")}>Agregar</button>
     </div>
   )
 };
