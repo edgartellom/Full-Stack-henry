@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnSearch{
+    border-radius: 5px;
+    border-color: lightgreen;
+    color: green;
+    box-shadow: 3px 3px 3px green;
+    margin: 3px;
+}
+
+.btnSearch:hover{
+    background-color: black;
+    color: white;
+}
+
+.inputSearch{
+    border-radius: 5px;
+    border-color: lightgray;
+    box-shadow: 3px 3px 3px gray;
+    margin: 3px;
+}

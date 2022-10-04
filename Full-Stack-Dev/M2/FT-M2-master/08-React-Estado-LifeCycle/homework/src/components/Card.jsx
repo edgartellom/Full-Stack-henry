@@ -1,9 +1,10 @@
 import React from 'react';
 import './Card.css';
+import {container} from './Card.module.css';
 
 export default function Card ({min, max, name, img, onClose, id}) {
     return (
-      <div className="card">
+      <div className={`card ${container}`}>
         <div id="closeIcon" className="row">
             <button onClick={onClose} className="btn btn-sm btn-danger">X</button>
         </div>
