@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.css';
-import {container} from './Card.module.css';
+import {container, title} from './Card.module.css';
 
 export default function Card ({min, max, name, img, onClose, id}) {
     return (
@@ -9,7 +9,7 @@ export default function Card ({min, max, name, img, onClose, id}) {
             <button onClick={onClose} className="btn btn-sm btn-danger">X</button>
         </div>
         <div className="card-body">
-          <h5 className="card-title">{name}</h5>
+          <h5 className={`card-title ${title}`}>{name}</h5>
           <div className="row">
             <div className="col-sm-4 col-md-4 col-lg-4">
               <p>Min</p>
