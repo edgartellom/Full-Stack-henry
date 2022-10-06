@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import {container} from './Cards.module.css'
+import {cards} from './Cards.module.css'
 
 export default function Cards({cities, onClose}) {
   // acá va tu código
@@ -8,7 +8,7 @@ export default function Cards({cities, onClose}) {
   if(cities){
 
     return (
-      <div className={container}>
+      <div className={cards}>
         {
           cities.map(city => (
             <Card
