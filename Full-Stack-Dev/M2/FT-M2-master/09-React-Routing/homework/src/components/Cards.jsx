@@ -1,19 +1,32 @@
 import React from 'react';
-import './Cards.css';
-
-import Card from './Card.jsx';
+import Card from './Card';
+import {cards} from './Cards.module.css'
 
 export default function Cards({cities, onClose}) {
-  return (
-    <div className='cards'>
-      {cities.map(c => <Card
-          key={c.id}
-          max={c.max}
-          min={c.min}
-          name={c.name}
-          img={c.img}
-          onClose={() => onClose(c.id)}
-        /> )}
-    </div>
-  );
+  // acá va tu código
+  // tip, podés usar un map
+  if(cities){
+
+    return (
+      <div className={cards}>
+        {
+          cities.map(city => (
+            <Card
+              key={city.id}
+              id={city.id}
+              max={city.max}
+              min={city.min}
+              name={city.name}
+              img={city.img}
+              onClose={() => onClose(city.id)}
+            />
+          ))
+        }
+      </div>
+    )
+  } else {
+    return(
+      <div>Sin ciudades</div>
+    )
+  }
 }

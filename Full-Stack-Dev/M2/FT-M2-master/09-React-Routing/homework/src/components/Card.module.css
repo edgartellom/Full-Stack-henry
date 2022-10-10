@@ -1,0 +1,30 @@
+.container{
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    background-color: aliceblue;
+    box-shadow: 7px 5px 5px black;
+}
+
+.btnClose{
+    float: right;
+    margin: 10px;
+    background-color: darkgray;
+    box-shadow: 3px 3px 3px gray;
+    color: white;
+    border-radius: 3px;
+    
+}
+
+.btnClose:hover{
+    background-color: red;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+}
+
+.weather-elements{
+    display: flex;
+    justify-content: space-around;
+}
