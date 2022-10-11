@@ -4,7 +4,10 @@ import Form from './Form.jsx';
 
 function App() {
   return (
-    <Form />
+    <div>
+      <img src={logo} alt='logo React' width="100" height="100"/>
+      <Form />
+    </div>
   );
 }
 

@@ -20,3 +20,13 @@ p.danger {
 input.danger {
   border: 2px solid red;
 }
+
+label{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+input{
+  margin-top: 10px;
+  margin-left: 10px;
+}
