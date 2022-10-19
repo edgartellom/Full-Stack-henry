@@ -15,7 +15,6 @@ const Timer = () => {
   function reset() {
     setSegundos(0);
     setActivo(false);
-    myRef.current.value = ''
   }
 
   function cambioTipo() {
@@ -47,6 +46,7 @@ const Timer = () => {
     if (segundos <= 0 && tipo === 'Cuenta Regresiva') {
       reset();
       clearInterval(intervalo);
+      myRef.current.value = '';
     }
 
     return () => clearInterval(intervalo);
