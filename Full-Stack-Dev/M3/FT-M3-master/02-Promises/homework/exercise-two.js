@@ -50,12 +50,10 @@ function problemA () {
   // );
 
   // promise version
-  Promise.all(
-    [
-      promisifiedReadFile('poem-two/stanza-01.txt').then(stanza1 => blue(stanza1)),
-      promisifiedReadFile('poem-two/stanza-02.txt').then(stanza2 => blue(stanza2))
-    ]
-  )
+  var promise1 = promisifiedReadFile('poem-two/stanza-01.txt').then(stanza1 => blue(stanza1));
+  var promise2 = promisifiedReadFile('poem-two/stanza-02.txt').then(stanza2 => blue(stanza2))
+  
+  Promise.all([ promise1, promise2 ])
   .then(() => console.log('-- A. promise version done --'))
 
 }
@@ -91,7 +89,7 @@ function problemB () {
   // promise version
   let promises = filenames.map((filename) => promisifiedReadFile(filename).then(stanza => blue(stanza)));
   Promise.all(promises)
-  .then(() => console.log('-- A. promise version done --'))
+  .then(() => console.log('-- B. promise version done --'))
 
 }
 
@@ -172,13 +170,14 @@ function problemD () {
   .then(
     (stanzas) => {
       stanzas.forEach((s) => blue(s));
-      console.log('-- D. promise version done --');
+      // console.log('-- D. promise version done --');
     }
   )
   .catch(err => {
     magenta(new Error(err));
-    console.log('-- D. promise version done --');
+    // console.log('-- D. promise version done --');
   })
+  .finally(() => console.log('-- D. promise version done --'))
 
 }
 
@@ -193,9 +192,9 @@ function problemE () {
   function promisifiedWriteFile (filename, str) {
     // tu código aquí
     return new Promise((resolve, reject) => {
-      fs.writeFile(filename, stanza, 'utf8', (err) =>{
+      fs.writeFile(filename, str, 'utf8', (err) =>{
         if (err) return reject(err);
-        resolve();
+        resolve('Escritura exitosa');
       })
     })
   }
