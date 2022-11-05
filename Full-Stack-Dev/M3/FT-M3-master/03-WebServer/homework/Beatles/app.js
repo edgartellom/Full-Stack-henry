@@ -22,3 +22,59 @@ var beatles=[{
   profilePic:"http://cp91279.biography.com/BIO_Bio-Shorts_0_Ringo-Starr_SF_HD_768x432-16x9.jpg"
 }
 ]
+
+http.createServer((req, res) => {
+  // API JSON
+  if (req.url === '/api') {
+    res.writeHead(200, { 'Content-Type' : 'application/json' });
+    return res.end(JSON.stringify(beatles));
+  }
+  
+  // Beatle API JSON
+  if (req.url.substring(0,5) === '/api/') {
+    // /api/John Lennon --> ['api', 'Jhon Lennon'] --> 'John Lennon'
+    const beatle = req.url.split('/').pop();
+    const found = beatles.find( b => encodeURI(b.name).toLowerCase() === beatle.toLowerCase());
+    if (found) {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(found));
+    }
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    return res.end(`${beatle} is not a Beatle!`);
+  }
+
+  // FRONT
+  if (req.url === '/') {
+    fs.readFile('./index.html', (err,data) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        return res.end('Resource not found');
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      return res.end(data);
+    })
+  }
+
+  if (req.url.length > 1) {
+    const beatle = req.url.split('/').pop();
+    const found = beatles.find( b => encodeURI(b.name).toLowerCase() === beatle.toLowerCase());
+
+    if(!found){
+      es.writeHead(404, { 'Content-Type': 'text/plain' });
+      return res.end('Resource not found');
+    }
+    fs.readFile('./beatle.html', 'utf-8', (err,data) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        return res.end('Resource not found');
+      }
+      data = data.replace(/{name}/g, found.name)
+                  .replace('{birthday}', found.birthdate)
+                  .replace('{profilePic}', found.profilePic);
+      
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      return res.end(data);
+    })
+  }
+
+}).listen(1337, '127.0.0.1', () => console.log('Listening to port 1337'));
