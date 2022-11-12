@@ -6,12 +6,19 @@ const STATUS_USER_ERROR = 422;
 // This array of posts persists in memory across requests. Feel free
 // to change this to a let binding if you need to reassign it.
 let posts = [];
+let IdCounter = 0;
 
 function Post(author, title, contents) {
-    this.id = posts.length + 1;
+    this.id = 0;
     this.author = author;
     this.title = title;
     this.contents = contents;
+    this.autoID();
+}
+
+Post.prototype.autoID = function (){
+    IdCounter++;
+    this.id = IdCounter;
 }
 
 const server = express();
